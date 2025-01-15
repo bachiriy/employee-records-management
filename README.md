@@ -1,105 +1,41 @@
 # Employee Records Management System
 
-## Overview
-The Employee Records Management System is a Java-based application designed to centralize and streamline the management of employee data across departments. This project provides functionality for HR personnel, managers, and administrators to effectively manage employee records while ensuring security, auditability, and compliance with validation rules.
+A Java-based desktop application for managing employee records with REST API support.
 
 ## Features
 
-### Core Functionality
-- **Employee Data Management**: 
-  - Full Name, Employee ID, Job Title, Department, Hire Date, Employment Status, Contact Information, and Address.
-- **User Roles and Permissions**:
-  - **HR Personnel**: Full CRUD operations on all employee data.
-  - **Managers**: Limited updates to employee data within their department.
-  - **Administrators**: Full access to all system features and configurations.
-- **Audit Trail**: Logs all changes to employee records with timestamps and user information.
-- **Search and Filtering**:
-  - Search by name, ID, department, or job title.
-  - Filter by employment status, department, or hire date.
-- **Validation Rules**:
-  - Ensure valid email formats.
-  - Enforce unique employee IDs.
-- **Reporting**:
-  - Generate basic reports on employee data.
+- Employee management (CRUD operations)
+- Audit logging
+- Role-based access control
+- Search and filtering capabilities
+- REST API with Swagger documentation
 
-## Technical Details
+## Technologies
 
-### Backend
-- **Language**: Java 17
-- **Frameworks**: Spring Boot
-- **Database**: Oracle SQL
-- **API Documentation**: Swagger (OpenAPI)
-- **Containerization**: Docker
+- Java 17
+- Spring Boot
+- Spring Security
+- Oracle Database
+- Swing UI
+- Docker
 
-### Frontend
-- **Desktop Application**: Swing-based UI
-  - **Layout Managers**: MigLayout and GridBagLayout
+## Getting Started
 
-### Testing
-- **Unit Tests**: JUnit
-- **Integration Tests**: Mockito
-- **API Testing**: Postman Collection
+1. Clone the repository
+2. Run `mvn clean install` to build the project
+3. Start the database: `docker-compose up db`
+4. Run the application: `docker-compose up app`
 
-### Additional Requirements
-- **Documentation**:
-  - Maintain detailed documentation in Markdown files.
-  - Include a backlog of tasks.
-- **Demo**:
-  - Provide a short video demonstrating the UI and key functionalities.
+## API Documentation
 
-## Setup Instructions
+Access Swagger UI at: http://localhost:8080/swagger-ui/
 
-### Prerequisites
-- Docker installed
-- Oracle SQL setup
-- Java 17 installed
+## Default Users
 
-### Running the Application
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/bachiriy/employee-records-management.git
-   ```
-2. Navigate to the project directory:
-   ```bash
-   cd app
-   ```
-3. Build and run the Docker image:
-   ```bash
-   docker build -t employee-records .
-   docker run -p 8080:8080 employee-records
-   ```
-4. Access the Swagger API documentation:
-   - Open your browser and navigate to `http://localhost:8080/swagger-ui.html`
-
-### Testing
-1. Run unit tests:
-   ```bash
-   ./gradlew test
-   ```
-2. Validate API endpoints using the provided Postman Collection.
-
-## Task Backlog
-- [ ] Implement CRUD operations for Employee Data.
-- [ ] Develop role-based access control.
-- [ ] Design the Swing-based UI with MigLayout and GridBagLayout.
-- [ ] Add validation rules for employee records.
-- [ ] Implement audit trail functionality.
-- [ ] Develop search and filtering features.
-- [ ] Generate basic reports.
-- [ ] Write unit and integration tests.
-- [ ] Create Docker container for the application.
-- [ ] Record demo video showcasing functionality.
-
-## Demo Video
-[will be added]
-
-## Author
-- Name: Mohammed El Bachiri
-- Email: [mebashiry@gmail.com](mail:mebashiry@gmail.com) 
+- Admin: admin/admin123
+- HR: hr/hr123
 
 ## License
-[Specify your license here]
 
-## Repository
-[employee-records-management](https://github.com/bachiriy/employee-records-management)
+MIT
 
