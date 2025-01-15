@@ -2,27 +2,33 @@ package com.ems.ui;
 
 import net.miginfocom.swing.MigLayout;
 import org.springframework.stereotype.Component;
-
 import javax.swing.*;
 import java.awt.*;
 
 @Component
 public class MainFrame extends JFrame {
-    
-    public MainFrame() {
+    private final JTabbedPane tabbedPane;
+    private final EmployeePanel employeePanel;
+    private final AuditPanel auditPanel;
+
+    public MainFrame(EmployeePanel employeePanel, AuditPanel auditPanel) {
+        this.employeePanel = employeePanel;
+        this.auditPanel = auditPanel;
+        this.tabbedPane = new JTabbedPane();
         initComponents();
     }
-    
+
     private void initComponents() {
         setTitle("Employee Management System");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new MigLayout("fill"));
         
-        // Set minimum size and center on screen
-        setMinimumSize(new Dimension(800, 600));
-        setLocationRelativeTo(null);
+        tabbedPane.addTab("Employees", employeePanel);
+        tabbedPane.addTab("Audit Logs", auditPanel);
         
-        // Add a temporary label
-        add(new JLabel("Employee Management System - Under Construction"), "center");
+        add(tabbedPane, "grow");
+        
+        setMinimumSize(new Dimension(1024, 768));
+        setLocationRelativeTo(null);
     }
 } 
