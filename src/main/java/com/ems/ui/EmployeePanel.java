@@ -2,6 +2,7 @@ package com.ems.ui;
 
 import com.ems.dto.EmployeeDTO;
 import com.ems.service.EmployeeService;
+import com.ems.ui.dialog.EmployeeDialog;
 import net.miginfocom.swing.MigLayout;
 import org.springframework.stereotype.Component;
 
@@ -93,11 +94,45 @@ public class EmployeePanel extends JPanel {
 
     // Dialog methods to be implemented
     private void showAddDialog() {
-        // TODO: Implement add dialog
+        EmployeeDTO newEmployee = new EmployeeDTO();
+        EmployeeDialog dialog = new EmployeeDialog(
+            (JFrame) SwingUtilities.getWindowAncestor(this),
+            newEmployee,
+            false
+        );
+        dialog.setVisible(true);
+        
+        if (dialog.isApproved()) {
+            employeeService.createEmployee(dialog.getEmployeeDTO());
+            loadEmployees();
+        }
     }
 
     private void showEditDialog() {
-        // TODO: Implement edit dialog
+        int row = employeeTable.getSelectedRow();
+        if (row != -1) {
+            String employeeId = (String) tableModel.getValueAt(row, 0);
+            EmployeeDTO employee = employeeService.getEmployeeById(employeeId);
+            
+            EmployeeDialog dialog = new EmployeeDialog(
+                (JFrame) SwingUtilities.getWindowAncestor(this),
+                employee,
+                true
+            );
+            dialog.setVisible(true);
+            
+            if (dialog.isApproved()) {
+                employeeService.updateEmployee(employeeId, dialog.getEmployeeDTO());
+                loadEmployees();
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                this,
+                "Please select an employee to edit",
+                "No Selection",
+                JOptionPane.WARNING_MESSAGE
+            );
+        }
     }
 
     private void deleteSelectedEmployee() {
