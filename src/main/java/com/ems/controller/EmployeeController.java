@@ -7,6 +7,7 @@ import io.swagger.annotations.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -22,6 +23,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+    @PreAuthorize("hasAnyRole('HR', 'ADMIN')")
     @PostMapping
     @ApiOperation(value = "Create a new employee", response = ApiResponse.class)
     @ApiResponses(value = {
@@ -35,6 +37,7 @@ public class EmployeeController {
         return ResponseEntity.ok(ApiResponse.success("Employee created successfully", created));
     }
 
+    @PreAuthorize("hasAnyRole('HR', 'ADMIN') or @userService.canAccessEmployee(authentication.name, #employeeId)")
     @PutMapping("/{employeeId}")
     @ApiOperation(value = "Update an existing employee", response = ApiResponse.class)
     public ResponseEntity<ApiResponse<EmployeeDTO>> updateEmployee(
@@ -46,6 +49,7 @@ public class EmployeeController {
         return ResponseEntity.ok(ApiResponse.success("Employee updated successfully", updated));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{employeeId}")
     @ApiOperation(value = "Delete an employee", response = ApiResponse.class)
     public ResponseEntity<ApiResponse<Void>> deleteEmployee(
