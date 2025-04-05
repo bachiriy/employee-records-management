@@ -32,13 +32,21 @@ public class ReportServiceImpl implements ReportService {
 
     @Override
     public JasperPrint generateDepartmentReport(String department) {
-        // Implementation similar to employee report but filtered by department
-        return null;
+        try {
+            // Implementation
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException("Error generating department report", e);
+        }
     }
 
     @Override
     public JasperPrint generateAuditReport(String entityType, String entityId) {
-        // Implementation for audit report
-        return null;
+        try {
+            // Implementation
+            return null;
+        } catch (Exception e) {
+            throw new RuntimeException("Error generating audit report", e);
+        }
     }
 } 

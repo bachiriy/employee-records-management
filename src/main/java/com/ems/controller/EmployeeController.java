@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/employees")
-@Api(tags = "Employee Management", description = "Operations pertaining to employees")
+@Api(tags = "Employee Management")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
@@ -25,12 +25,12 @@ public class EmployeeController {
 
     @PreAuthorize("hasAnyRole('HR', 'ADMIN')")
     @PostMapping
-    @ApiOperation(value = "Create a new employee", response = ApiResponse.class)
+    @ApiOperation(value = "Create a new employee")
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "Successfully created employee"),
         @ApiResponse(code = 400, message = "Invalid input")
     })
-    public ResponseEntity<ApiResponse<EmployeeDTO>> createEmployee(
+    public ResponseEntity<com.ems.dto.ApiResponse<EmployeeDTO>> createEmployee(
             @ApiParam(value = "Employee object", required = true) 
             @RequestBody EmployeeDTO employeeDTO) {
         EmployeeDTO created = employeeService.createEmployee(employeeDTO);
